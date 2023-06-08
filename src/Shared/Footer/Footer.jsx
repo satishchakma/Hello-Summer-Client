@@ -44,6 +44,9 @@ const Footer = () => {
           </p>
         </div>
       </div>
+      <p className="text-center text-white pb-8">
+        copyright @PHero All Rights Reserved
+      </p>
     </footer>
   );
 };

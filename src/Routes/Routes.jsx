@@ -4,11 +4,14 @@ import Home from "../Pages/Home/Home/Home";
 import Classes from "../Pages/ Classes/ Classes";
 import Dashboard from "../Pages/Dashboard/Dashboard";
 import Instructors from "../Pages/Instructors/Instructors";
+import Errorpage from "../components/Errorpage/Errorpage";
+import Register from "../Pages/Register/Register";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <App></App>,
+    errorElement: <Errorpage></Errorpage>,
     children: [
       {
         path: "/",
@@ -25,6 +28,10 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard",
         element: <Dashboard></Dashboard>,
+      },
+      {
+        path: "/register",
+        element: <Register></Register>,
       },
     ],
   },
