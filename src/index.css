@@ -1,3 +1,106 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.navbar {
+  font-family: "Aleo", serif;
+  font-weight: 700;
+  font-style: normal;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 1.16px;
+  color: #a5958c;
+  transition: 0.3s all ease-in-out;
+}
+.active {
+  color: #422c18;
+  border-bottom: 3px dashed #dd5449;
+}
+.family-aleo {
+  font-family: "Aleo", serif;
+}
+.family-grand {
+  font-family: "Grand Hotel", cursive;
+}
+.family-lucky {
+  font-family: "Luckiest Guy", cursive;
+}
+.subheading {
+  text-transform: lowercase;
+
+  color: rgb(252, 192, 68);
+  text-decoration: none;
+
+  text-align: center;
+  line-height: 40px;
+  letter-spacing: 0px;
+  font-weight: 400;
+  font-size: 35px;
+}
+.banner-contents {
+  position: absolute;
+  /* top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); */
+  position: absolute;
+  background: #00000069;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.heading {
+  text-transform: uppercase;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  line-height: 90px;
+  letter-spacing: 1px;
+  font-weight: 400;
+  font-size: 100px;
+}
+.swiper-pagination-bullet {
+  background: rgba(255, 255, 255, 0.3) !important;
+}
+.swiper-pagination-bullet-active {
+  background-color: white !important;
+}
+.banner-btn {
+  background-color: rgb(221, 84, 73);
+
+  cursor: pointer;
+
+  color: rgb(255, 255, 255);
+
+  text-align: center;
+  line-height: 17px;
+  letter-spacing: 0px;
+  font-weight: 700;
+  font-size: 16px;
+  border-color: transparent;
+  padding: 24px 39px;
+  border-radius: 8px;
+  transition: 0.3s all ease-in-out;
+  border-width: 0px;
+  border-style: none;
+}
+.banner-btn:hover {
+  background-color: rgb(188 69 59);
+}
+.banner-img {
+  height: 760px;
+  object-fit: cover;
+  width: 100%;
+}
+.countdown {
+  background-color: #df9a18;
+  -webkit-border-radius: 30px;
+  -ms-border-radius: 30px;
+  border-radius: 30px;
+  overflow: hidden;
+  padding: 10px;
+  box-sizing: border-box;
+  margin-right: 10px;
+  min-width: 100px;
+  color: white;
+}
