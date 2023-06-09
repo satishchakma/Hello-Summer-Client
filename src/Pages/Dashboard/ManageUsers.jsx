@@ -43,6 +43,7 @@ const ManageUsers = () => {
                       key={user._id}
                       user={user}
                       index={index}
+                      refetch={refetch}
                     ></UserSingle>
                   ))}
                 </tbody>
