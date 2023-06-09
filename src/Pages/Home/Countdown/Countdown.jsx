@@ -21,16 +21,16 @@ function MyTimer({ expiryTimestamp }) {
   return (
     <div style={{ textAlign: "center" }}>
       <div style={{ fontSize: "65px" }} className="grid grid-cols-4">
-        <div className="font-lucky flex flex-col bg-[#df9a18] p-4 ml-3 rounded-[30px] text-white">
+        <div className="family-lucky flex flex-col bg-[#df9a18] p-4 ml-3 rounded-[30px] text-white">
           {days} <span className="text-3xl family-aleo">days</span>
         </div>
-        <div className="font-lucky flex flex-col bg-[#df9a18] p-4 ml-3 rounded-[30px] text-white">
+        <div className="family-lucky flex flex-col bg-[#df9a18] p-4 ml-3 rounded-[30px] text-white">
           {hours} <span className="text-3xl family-aleo">hours</span>
         </div>
-        <div className="font-lucky flex flex-col bg-[#df9a18] p-4 ml-3 rounded-[30px] text-white">
+        <div className="family-lucky flex flex-col bg-[#df9a18] p-4 ml-3 rounded-[30px] text-white">
           {minutes} <span className="text-3xl family-aleo">minutes</span>
         </div>
-        <div className="font-lucky flex flex-col bg-[#df9a18] p-4 ml-3 rounded-[30px] text-white">
+        <div className="family-lucky flex flex-col bg-[#df9a18] p-4 ml-3 rounded-[30px] text-white">
           {seconds} <span className="text-3xl family-aleo">seconds</span>
         </div>
       </div>

@@ -19,7 +19,9 @@ import { Autoplay, Pagination } from "swiper";
 const Banner = () => {
   return (
     <Swiper
-      data-swiper-autoplay="2000"
+      autoplay={{
+        delay: 2500, // Autoplay delay in milliseconds
+      }}
       pagination={{
         clickable: true,
       }}
@@ -27,7 +29,7 @@ const Banner = () => {
       className="mySwiper swiper-h "
       spaceBetween={50}
     >
-      <SwiperSlide data-swiper-autoplay="2000">
+      <SwiperSlide>
         <img className="banner-img" src={banner1} alt="" />
         <div className="banner-contents">
           <h2 className="family-grand subheading">spend a great week with</h2>
@@ -40,7 +42,7 @@ const Banner = () => {
           </button>
         </div>
       </SwiperSlide>
-      <SwiperSlide data-swiper-autoplay="2000">
+      <SwiperSlide>
         <img className="banner-img" src={banner2} alt="" />
         <div className="banner-contents">
           <h2 className="family-grand subheading">children summer camp</h2>
@@ -53,7 +55,7 @@ const Banner = () => {
           </button>
         </div>
       </SwiperSlide>
-      <SwiperSlide data-swiper-autoplay="2000">
+      <SwiperSlide>
         <img className="banner-img" src={banner3} alt="" />
         <div className="banner-contents">
           <h2 className="family-grand subheading">you will find</h2>

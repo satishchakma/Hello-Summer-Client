@@ -6,6 +6,10 @@ import Dashboard from "../Pages/Dashboard/Dashboard";
 import Instructors from "../Pages/Instructors/Instructors";
 import Errorpage from "../components/Errorpage/Errorpage";
 import Register from "../Pages/Register/Register";
+import Login from "../Pages/Login/Login";
+import ManageClasses from "../Pages/Dashboard/ManageClasses";
+import ManageUsers from "../Pages/Dashboard/ManageUsers";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -25,13 +29,36 @@ export const router = createBrowserRouter([
         path: "/classes",
         element: <Classes></Classes>,
       },
-      {
-        path: "/dashboard",
-        element: <Dashboard></Dashboard>,
-      },
+
       {
         path: "/register",
         element: <Register></Register>,
+      },
+      {
+        path: "/login",
+        element: <Login></Login>,
+      },
+    ],
+  },
+  {
+    path: "dashboard",
+    element: (
+      <PrivateRoute>
+        <Dashboard></Dashboard>
+      </PrivateRoute>
+    ),
+    children: [
+      {
+        path: "dashboard",
+        element: <ManageClasses></ManageClasses>,
+      },
+      {
+        path: "manage_classes",
+        element: <ManageClasses></ManageClasses>,
+      },
+      {
+        path: "manage_users",
+        element: <ManageUsers></ManageUsers>,
       },
     ],
   },

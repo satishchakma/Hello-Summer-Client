@@ -1,14 +1,21 @@
 import React from "react";
+import { useState } from "react";
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../Providers/AuthProviders";
 
 const Register = () => {
   const {
     register,
     handleSubmit,
+    reset,
     watch,
     formState: { errors },
   } = useForm();
+  const password = watch("password");
+
+  const [showPassword, setShowPassword] = useState(false);
 
   const { createUser, updateUserProfile } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -22,7 +29,7 @@ const Register = () => {
       updateUserProfile(data.name, data.photoURL)
         .then(() => {
           const saveUser = { name: data.name, email: data.email };
-          fetch("https://bistro-boss-server-fawn.vercel.app/users", {
+          fetch("http://localhost:3000/users", {
             method: "POST",
             headers: {
               "content-type": "application/json",
@@ -33,13 +40,14 @@ const Register = () => {
             .then((data) => {
               if (data.insertedId) {
                 reset();
-                Swal.fire({
-                  position: "top-end",
-                  icon: "success",
-                  title: "User created successfully.",
-                  showConfirmButton: false,
-                  timer: 1500,
-                });
+                // Swal.fire({
+                //   position: "top-end",
+                //   icon: "success",
+                //   title: "User created successfully.",
+                //   showConfirmButton: false,
+                //   timer: 1500,
+                // });
+                alert("user created successfully");
                 navigate("/");
               }
             });
@@ -138,7 +146,7 @@ const Register = () => {
             </p>
           )}
         </div>
-        <div className="form-control">
+        {/* <div className="form-control">
           <label className="label">
             <span className="label-text"> Confirm Password</span>
           </label>
@@ -170,7 +178,30 @@ const Register = () => {
               one special character.
             </p>
           )}
+        </div> */}
+        <div className="form-control">
+          <label className="label">
+            <span className="label-text">Confirm Password</span>
+          </label>
+          <input
+            type={showPassword ? "text" : "password"}
+            {...register("confirmPassword", {
+              validate: (value) =>
+                value === password || "Passwords do not match",
+            })}
+            placeholder="Confirm Password"
+            className="input input-bordered"
+          />
+          {errors.confirmPassword && (
+            <p className="text-red-600">{errors.confirmPassword.message}</p>
+          )}
         </div>
+        <p className="block col-span-2">
+          Already have an account?
+          <Link to="/login" className="underline">
+            Login here
+          </Link>
+        </p>
         <div className="form-control mt-6 col-span-2">
           <input
             className="family-aleo banner-btn mt-6"

@@ -1,9 +1,65 @@
 import React from "react";
+import { Link, Outlet } from "react-router-dom";
+
+import { UserGroupIcon } from "@heroicons/react/24/solid";
 
 const Dashboard = () => {
+  // TODO: make it dynamic based on db data later
+  const isAdmin = true;
   return (
-    <div>
-      <h1>Dashboard</h1>
+    <div className="drawer lg:drawer-open">
+      <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
+      <div className="drawer-content flex flex-col items-center justify-center">
+        {/* Page content here */}
+        <label
+          htmlFor="my-drawer-2"
+          className="btn btn-primary drawer-button lg:hidden"
+        >
+          Open drawer
+        </label>
+
+        <Outlet></Outlet>
+      </div>
+      <div className="drawer-side">
+        <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
+        <ul className="menu p-4 w-80 h-full bg-base-200 text-base-content">
+          {/* Sidebar content here */}
+
+          {isAdmin ? (
+            <>
+              <li className="mb-4">
+                <Link
+                  to="/dashboard/manage_classes"
+                  className="flex items-center bg-yellow-200 rounded-xl font-bold text-sm text-yellow-900 py-3 px-4"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="1em"
+                    height="1em"
+                    fill="currentColor"
+                    className="text-lg mr-4"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4V.5zM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2zm-3.5-7h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5z" />
+                  </svg>
+                  Manage Classes
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/dashboard/manage_users"
+                  className="flex items-center bg-yellow-200 rounded-xl font-bold text-sm text-yellow-900 py-3 px-4"
+                >
+                  <UserGroupIcon className="w-6 h-6"></UserGroupIcon>
+                  Manage Users
+                </Link>
+              </li>
+            </>
+          ) : (
+            <></>
+          )}
+        </ul>
+      </div>
     </div>
   );
 };
