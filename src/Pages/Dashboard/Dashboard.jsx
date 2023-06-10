@@ -3,11 +3,16 @@ import { Link, Outlet } from "react-router-dom";
 
 import { UserGroupIcon } from "@heroicons/react/24/solid";
 import useAdmin from "../../hooks/useAdmin";
+import useAuth from "../../hooks/useAuth";
+import { useState } from "react";
+import useInstructor from "../../hooks/useInstructor";
 
 const Dashboard = () => {
   // TODO: make it dynamic based on db data later
+
   const isAdmin = useAdmin();
-  const isInstructor = true;
+  const isInstructor = useInstructor();
+
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
