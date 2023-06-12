@@ -127,3 +127,10 @@
     background-position: 50%, 3px 7px, -3px 0;
   }
 }
+
+.swiper-pagination-bullet {
+  background-color: grey !important;
+}
+.swiper-pagination-bullet-active {
+  background-color: orange !important;
+}

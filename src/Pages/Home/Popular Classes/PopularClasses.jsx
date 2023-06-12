@@ -22,10 +22,10 @@ const PopularClasses = () => {
   });
   return (
     <div className="container mx-auto my-24 overflow-hidden">
-      <h1 className="text-center mb-8 font-bold text-5xl family-aleo">
+      <h1 className="text-center mb-8 font-bold text-5xl family-lucky">
         Popular Classes
       </h1>
-      <p className="text-center w-1/2 mx-auto mb-6">
+      <p className="text-center w-1/2 mx-auto mb-6 family-aleo">
         Explore our selection of popular classes that are loved by our students.
         These classes cover a wide range of topics and provide valuable learning
         opportunities.
