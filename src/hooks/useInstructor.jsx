@@ -4,6 +4,7 @@ import useSecureAxios from "./useSecureAxios";
 
 const useInstructor = () => {
   const { user, loading } = useAuth();
+  // console.log(user, "see this in instructoruse");
   const [axiosSecure] = useSecureAxios();
   // use axios secure with react query
   const { data: isInstructor, isLoading: isInstructorLoading } = useQuery({
@@ -11,7 +12,7 @@ const useInstructor = () => {
     enabled: !loading,
     queryFn: async () => {
       const res = await axiosSecure.get(`/users/instructors/${user?.email}`);
-      console.log(res.data);
+      // console.log(res.data);
 
       return res.data.instructor;
     },
