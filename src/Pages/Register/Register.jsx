@@ -5,6 +5,8 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProviders";
 
+import Swal from "sweetalert2";
+
 const Register = () => {
   const {
     register,
@@ -28,7 +30,12 @@ const Register = () => {
 
       updateUserProfile(data.name, data.photoURL)
         .then(() => {
-          const saveUser = { name: data.name, email: data.email };
+          const saveUser = {
+            name: data.name,
+            email: data.email,
+            role: "student",
+            photo: data.photoURL,
+          };
           fetch("http://localhost:3000/users", {
             method: "POST",
             headers: {
@@ -40,14 +47,14 @@ const Register = () => {
             .then((data) => {
               if (data.insertedId) {
                 reset();
-                // Swal.fire({
-                //   position: "top-end",
-                //   icon: "success",
-                //   title: "User created successfully.",
-                //   showConfirmButton: false,
-                //   timer: 1500,
-                // });
-                alert("user created successfully");
+                Swal.fire({
+                  position: "top-end",
+                  icon: "success",
+                  title: "User created successfully.",
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
+
                 navigate("/");
               }
             });

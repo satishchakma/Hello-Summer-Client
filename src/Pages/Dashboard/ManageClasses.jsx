@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import useAxiosSecure from "../../hooks/useSecureAxios";
+import useSecureAxios from "../../hooks/useSecureAxios";
 // ES6 Modules or TypeScript
 import Swal from "sweetalert2";
 
 const ManageClasses = () => {
-  const [axiosSecure] = useAxiosSecure();
+  const [axiosSecure] = useSecureAxios();
+  const [disabled, setDisabled] = useState(true);
 
   const { data: classes = [], refetch } = useQuery(["classes"], async () => {
     const res = await axiosSecure.get("/classes");
@@ -49,7 +50,7 @@ const ManageClasses = () => {
         </thead>
         <tbody>
           {classes.map((singleClass) => (
-            <tr className="hover:bg-yellow-50">
+            <tr className="hover:bg-yellow-50" key={singleClass._id}>
               <td className="p-2 border-b border-yellow-500">
                 <img
                   src={singleClass.classImg}
@@ -78,14 +79,24 @@ const ManageClasses = () => {
                 <div className="flex justify-center space-x-2">
                   <button
                     onClick={() => handleApprove(singleClass._id)}
-                    className="bg-green-500 hover:bg-green-600 text-white py-1 px-2 rounded-md"
+                    className={`bg-green-500 hover:bg-green-600 text-white py-1 px-2 rounded-md`}
                   >
                     Approve
                   </button>
-                  <button className="bg-red-500 hover:bg-red-600 text-white py-1 px-2 rounded-md">
+                  <button
+                    disabled={disabled}
+                    onClick={() => {
+                      console.log("clicked");
+                    }}
+                    className={`bg-red-500 ${
+                      disabled ? "cursor-not-allowed" : "nothing"
+                    } hover:bg-red-600 text-white py-1 px-2 rounded-md`}
+                  >
                     Deny
                   </button>
-                  <button className="bg-yellow-500 hover:bg-yellow-600 text-white py-1 px-2 rounded-md">
+                  <button
+                    className={`bg-yellow-500 hover:bg-yellow-600 text-white py-1 px-2 rounded-md`}
+                  >
                     Send feedback
                   </button>
                 </div>
@@ -99,26 +110,3 @@ const ManageClasses = () => {
 };
 
 export default ManageClasses;
-
-<tr className="hover:bg-yellow-50">
-  <td className="p-2 border-b border-yellow-500"></td>
-  <td className="p-2 border-b border-yellow-500">Class Name 1</td>
-  <td className="p-2 border-b border-yellow-500">Instructor Name 1</td>
-  <td className="p-2 border-b border-yellow-500">Instructor Email 1</td>
-  <td className="p-2 border-b border-yellow-500">Available Seats 1</td>
-  <td className="p-2 border-b border-yellow-500">Price 1</td>
-  <td className="p-2 border-b border-yellow-500">Status 1</td>
-  <td className="p-2 border-b border-yellow-500">
-    <div className="flex justify-center space-x-2">
-      <button className="bg-yellow-500 hover:bg-yellow-600 text-white py-1 px-2 rounded-md">
-        Button 1
-      </button>
-      <button className="bg-yellow-500 hover:bg-yellow-600 text-white py-1 px-2 rounded-md">
-        Button 2
-      </button>
-      <button className="bg-yellow-500 hover:bg-yellow-600 text-white py-1 px-2 rounded-md">
-        Button 3
-      </button>
-    </div>
-  </td>
-</tr>;

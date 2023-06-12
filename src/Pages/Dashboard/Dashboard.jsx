@@ -3,15 +3,17 @@ import { Link, Outlet } from "react-router-dom";
 
 import { UserGroupIcon } from "@heroicons/react/24/solid";
 import useAdmin from "../../hooks/useAdmin";
-import useAuth from "../../hooks/useAuth";
-import { useState } from "react";
 import useInstructor from "../../hooks/useInstructor";
 
 const Dashboard = () => {
   // TODO: make it dynamic based on db data later
 
-  const isAdmin = useAdmin();
-  const isInstructor = useInstructor();
+  const [isAdmin] = useAdmin();
+
+  // console.log("this is adminin or not", isAdmin);
+  // const [isInstructor, isInstructorLoading] = useInstructor();
+  const [isInstructor] = useInstructor();
+  console.log("this is instructor or not", isInstructor);
 
   return (
     <div className="drawer lg:drawer-open">
@@ -32,7 +34,7 @@ const Dashboard = () => {
         <ul className="menu p-4 w-80 h-full bg-base-200 text-base-content">
           {/* Sidebar content here */}
 
-          {isAdmin ? (
+          {isAdmin && (
             <>
               <li className="mb-4">
                 <Link
@@ -62,10 +64,9 @@ const Dashboard = () => {
                 </Link>
               </li>
             </>
-          ) : (
-            <></>
           )}
-          {isInstructor ? (
+
+          {isInstructor && (
             <>
               <li className="mb-4">
                 <Link
@@ -95,8 +96,17 @@ const Dashboard = () => {
                 </Link>
               </li>
             </>
-          ) : (
-            <></>
+          )}
+          {!isAdmin && !isInstructor && (
+            <li className="mb-4">
+              <Link
+                to="/dashboard/my_classes"
+                className="flex items-center bg-yellow-200 rounded-xl font-bold text-sm text-yellow-900 py-3 px-4"
+              >
+                <UserGroupIcon className="w-6 h-6"></UserGroupIcon>
+                My selected classes
+              </Link>
+            </li>
           )}
         </ul>
       </div>
