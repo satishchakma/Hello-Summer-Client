@@ -6,7 +6,6 @@ import Swal from "sweetalert2";
 
 const ManageClasses = () => {
   const [axiosSecure] = useSecureAxios();
-  const [disabled, setDisabled] = useState(true);
 
   const { data: classes = [], refetch } = useQuery(["classes"], async () => {
     const res = await axiosSecure.get("/classes");
@@ -15,6 +14,7 @@ const ManageClasses = () => {
   console.log(classes);
 
   const handleApprove = (id) => {
+    console.log("clicked on approved");
     fetch(`http://localhost:3000/classes/${id}`, {
       method: "PATCH",
     })
@@ -26,6 +26,25 @@ const ManageClasses = () => {
             position: "top-end",
             icon: "success",
             title: "The class is approved!!",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      });
+  };
+  const handleDeny = (id) => {
+    console.log("clicked on deny button");
+    fetch(`http://localhost:3000/classes/deny/${id}`, {
+      method: "PATCH",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.modifiedCount) {
+          refetch();
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "The class is denied!!",
             showConfirmButton: false,
             timer: 1500,
           });
@@ -79,23 +98,38 @@ const ManageClasses = () => {
                 <div className="flex justify-center space-x-2">
                   <button
                     onClick={() => handleApprove(singleClass._id)}
-                    className={`bg-green-500 hover:bg-green-600 text-white py-1 px-2 rounded-md`}
+                    disabled={singleClass.status === "denied"}
+                    className={`bg-green-500 ${
+                      singleClass.status === "denied"
+                        ? "bg-slate-300 hover:bg-slate-300"
+                        : ""
+                    }  hover:bg-green-600 text-white py-1 px-2 rounded-md`}
                   >
                     Approve
                   </button>
+
                   <button
-                    disabled={disabled}
-                    onClick={() => {
-                      console.log("clicked");
-                    }}
+                    disabled={
+                      singleClass.status === "approved" ||
+                      singleClass.status === "denied"
+                    }
+                    onClick={() => handleDeny(singleClass._id)}
                     className={`bg-red-500 ${
-                      disabled ? "cursor-not-allowed" : "nothing"
-                    } hover:bg-red-600 text-white py-1 px-2 rounded-md`}
+                      singleClass.status === "approved" ||
+                      singleClass.status === "denied"
+                        ? "bg-slate-300 hover:bg-slate-300"
+                        : ""
+                    }  hover:bg-red-600 text-white py-1 px-2 rounded-md`}
                   >
                     Deny
                   </button>
                   <button
-                    className={`bg-yellow-500 hover:bg-yellow-600 text-white py-1 px-2 rounded-md`}
+                    disabled={singleClass.status === "approved"}
+                    className={`bg-yellow-500 ${
+                      singleClass.status === "approved"
+                        ? "bg-slate-300 hover:bg-slate-300"
+                        : ""
+                    } hover:bg-yellow-600 text-white py-1 px-2 rounded-md`}
                   >
                     Send feedback
                   </button>
