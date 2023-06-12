@@ -98,15 +98,26 @@ const Dashboard = () => {
             </>
           )}
           {!isAdmin && !isInstructor && (
-            <li className="mb-4">
-              <Link
-                to="/dashboard/my_classes"
-                className="flex items-center bg-yellow-200 rounded-xl font-bold text-sm text-yellow-900 py-3 px-4"
-              >
-                <UserGroupIcon className="w-6 h-6"></UserGroupIcon>
-                My selected classes
-              </Link>
-            </li>
+            <>
+              <li className="mb-4">
+                <Link
+                  to="/dashboard/my_selected_classes"
+                  className="flex items-center bg-yellow-200 rounded-xl font-bold text-sm text-yellow-900 py-3 px-4"
+                >
+                  <UserGroupIcon className="w-6 h-6"></UserGroupIcon>
+                  My selected classes
+                </Link>
+              </li>
+              <li className="mb-4">
+                <Link
+                  to="/dashboard/my_enrolled_classes"
+                  className="flex items-center bg-yellow-200 rounded-xl font-bold text-sm text-yellow-900 py-3 px-4"
+                >
+                  <UserGroupIcon className="w-6 h-6"></UserGroupIcon>
+                  My enrolled classes
+                </Link>
+              </li>
+            </>
           )}
         </ul>
       </div>
