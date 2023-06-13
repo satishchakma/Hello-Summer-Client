@@ -3,14 +3,26 @@ import { useQuery } from "@tanstack/react-query";
 import useSecureAxios from "../../hooks/useSecureAxios";
 // ES6 Modules or TypeScript
 import Swal from "sweetalert2";
+import FeedbackModal from "./FeedbackModal";
+
+import { useForm } from "react-hook-form";
 
 const ManageClasses = () => {
   const [axiosSecure] = useSecureAxios();
+  const { register, handleSubmit } = useForm();
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedClass, setSelectedClass] = useState(null);
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
 
   const { data: classes = [], refetch } = useQuery(["classes"], async () => {
     const res = await axiosSecure.get("/classes");
     return res.data;
   });
+
   console.log(classes);
 
   const handleApprove = (id) => {
@@ -51,6 +63,43 @@ const ManageClasses = () => {
         }
       });
   };
+  const handleSendFeedback = (id) => {
+    Swal.fire({
+      title: "Send Feedback",
+      text: "Please provide your feedback:",
+      input: "textarea",
+      inputAttributes: {
+        autocapitalize: "off",
+      },
+      showCancelButton: true,
+      confirmButtonText: "Send",
+      showLoaderOnConfirm: true,
+      preConfirm: (feedback) => {
+        console.log(feedback, "this is feedback");
+        return axiosSecure
+          .patch(`/classes/feedback/${id}`, { feedback: feedback })
+          .then((response) => {
+            if (response.data.modifiedCount) {
+              refetch();
+              Swal.fire({
+                title: "Feedback Sent",
+                text: "Your feedback has been submitted.",
+                icon: "success",
+              });
+            } else {
+              throw new Error("Failed to send feedback.");
+            }
+          })
+          .catch((error) => {
+            Swal.fire({
+              title: "Error",
+              text: "Failed to send feedback.",
+              icon: "error",
+            });
+          });
+      },
+    });
+  };
 
   return (
     <div>
@@ -73,7 +122,7 @@ const ManageClasses = () => {
               <td className="p-2 border-b border-yellow-500">
                 <img
                   src={singleClass.classImg}
-                  className="rounded-lg w-full"
+                  className="rounded-lg w-36"
                 ></img>
               </td>
               <td className="p-2 border-b border-yellow-500">
@@ -123,6 +172,22 @@ const ManageClasses = () => {
                   >
                     Deny
                   </button>
+
+                  {/* <button
+                    disabled={singleClass.status === "approved"}
+                    // onClick={() => handleSendFeedback(singleClass._id)}
+                    className={`bg-yellow-500 ${
+                      singleClass.status === "approved"
+                        ? "bg-slate-300 hover:bg-slate-300"
+                        : ""
+                    } hover:bg-yellow-600 text-white py-1 px-2 rounded-md`}
+                  >
+                    Send feedback
+                  </button> */}
+                  <FeedbackModal
+                    singleClass={selectedClass}
+                    onClose={handleCloseModal}
+                  />
                   <button
                     disabled={singleClass.status === "approved"}
                     className={`bg-yellow-500 ${
@@ -130,6 +195,7 @@ const ManageClasses = () => {
                         ? "bg-slate-300 hover:bg-slate-300"
                         : ""
                     } hover:bg-yellow-600 text-white py-1 px-2 rounded-md`}
+                    onClick={() => handleSendFeedback(singleClass._id)}
                   >
                     Send feedback
                   </button>

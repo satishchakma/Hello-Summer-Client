@@ -4,6 +4,7 @@ import { Link, Outlet } from "react-router-dom";
 import { UserGroupIcon } from "@heroicons/react/24/solid";
 import useAdmin from "../../hooks/useAdmin";
 import useInstructor from "../../hooks/useInstructor";
+import FeedbackModal from "./FeedbackModal";
 
 const Dashboard = () => {
   // TODO: make it dynamic based on db data later
