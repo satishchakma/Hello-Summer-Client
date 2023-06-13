@@ -15,7 +15,7 @@ const MyClasses = () => {
       .then((data) => setMyClasses(data));
   }, []);
   return (
-    <div className="bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-lg p-4 shadow-lg  w-full px-8">
+    <div className="bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-lg p-4 shadow-lg  w-full px-8 ">
       <table className="w-full text-left">
         <thead>
           <tr className="bg-yellow-500 text-white">
