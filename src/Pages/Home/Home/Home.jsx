@@ -5,10 +5,19 @@ import PopularClasses from "../Popular Classes/PopularClasses";
 import PopularInstructors from "../Popular Instructors/PopularInstructors";
 import Recommendations from "./Recommendations/Recommendations";
 import WhyChooseUs from "./Why Choose Us/WhyChooseUs";
+// framer motion
+
+import { motion, useScroll } from "framer-motion";
 
 const Home = () => {
+  const { scrollYProgress } = useScroll();
   return (
     <div>
+      <motion.div
+        className="progress-bar"
+        style={{ scaleX: scrollYProgress }}
+      />
+
       <Banner></Banner>
       <Countdown></Countdown>
       <PopularClasses></PopularClasses>

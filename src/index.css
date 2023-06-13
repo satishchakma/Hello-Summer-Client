@@ -134,3 +134,15 @@
 .swiper-pagination-bullet-active {
   background-color: orange !important;
 }
+
+.progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 10px;
+  background: var(--red);
+  transform-origin: 0%;
+  z-index: 9;
+  background-color: rgb(221, 84, 73) !important;
+}
