@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, Outlet } from "react-router-dom";
 
-import { UserGroupIcon } from "@heroicons/react/24/solid";
+import { UserGroupIcon, BookmarkIcon } from "@heroicons/react/24/solid";
 import useAdmin from "../../hooks/useAdmin";
 import useInstructor from "../../hooks/useInstructor";
 import FeedbackModal from "./FeedbackModal";
@@ -105,7 +105,7 @@ const Dashboard = () => {
                   to="/dashboard/my_selected_classes"
                   className="flex items-center bg-yellow-200 rounded-xl font-bold text-sm text-yellow-900 py-3 px-4"
                 >
-                  <UserGroupIcon className="w-6 h-6"></UserGroupIcon>
+                  <BookmarkIcon className="w-6 h-6"></BookmarkIcon>
                   My selected classes
                 </Link>
               </li>
