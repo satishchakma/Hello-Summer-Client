@@ -5,9 +5,12 @@ import Swal from "sweetalert2";
 
 const UserSingle = ({ user, index, refetch }) => {
   const handleMakeAdmin = (id) => {
-    fetch(`http://localhost:3000/users/admin/${user._id}`, {
-      method: "PATCH",
-    })
+    fetch(
+      `https://hello-summer-server-two.vercel.app/users/admin/${user._id}`,
+      {
+        method: "PATCH",
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.modifiedCount) {
@@ -23,9 +26,12 @@ const UserSingle = ({ user, index, refetch }) => {
       });
   };
   const handleMakeInstructor = (id) => {
-    fetch(`http://localhost:3000/users/instructor/${user._id}`, {
-      method: "PATCH",
-    })
+    fetch(
+      `https://hello-summer-server-two.vercel.app/users/instructor/${user._id}`,
+      {
+        method: "PATCH",
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.modifiedCount) {

@@ -27,7 +27,7 @@ const ManageClasses = () => {
 
   const handleApprove = (id) => {
     console.log("clicked on approved");
-    fetch(`http://localhost:3000/classes/${id}`, {
+    fetch(`https://hello-summer-server-two.vercel.app/classes/${id}`, {
       method: "PATCH",
     })
       .then((res) => res.json())
@@ -46,7 +46,7 @@ const ManageClasses = () => {
   };
   const handleDeny = (id) => {
     console.log("clicked on deny button");
-    fetch(`http://localhost:3000/classes/deny/${id}`, {
+    fetch(`https://hello-summer-server-two.vercel.app/classes/deny/${id}`, {
       method: "PATCH",
     })
       .then((res) => res.json())
