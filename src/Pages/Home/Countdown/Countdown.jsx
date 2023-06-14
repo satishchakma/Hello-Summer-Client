@@ -20,7 +20,10 @@ function MyTimer({ expiryTimestamp }) {
 
   return (
     <div style={{ textAlign: "center" }}>
-      <div style={{ fontSize: "65px" }} className="grid grid-cols-4">
+      <div
+        style={{ fontSize: "65px" }}
+        className="grid lg:grid-cols-4 grid-cols-2 gap-4"
+      >
         <div className="family-lucky flex flex-col bg-[#df9a18] p-4 ml-3 rounded-[30px] text-white">
           {days} <span className="text-3xl family-aleo">days</span>
         </div>
@@ -43,8 +46,8 @@ const Countdown = () => {
   time.setSeconds(time.getSeconds() + 15975670); // 10 minutes timer
   return (
     <div className="bg-[#fcc044] py-24">
-      <div className="container mx-auto flex justify-center items-center h-full">
-        <div className="w-1/2">
+      <div className="container mx-auto flex justify-center items-center h-full flex-col lg:flex-row">
+        <div className="lg:w-1/2 w-full px-7">
           <h6 className="family-grand text-[#d39013] text-[35px]">
             until first session
           </h6>
@@ -53,7 +56,7 @@ const Countdown = () => {
             of Summer Camp!
           </h2>
         </div>
-        <div className="w-1/2">
+        <div className="lg:w-1/2 w-full px-7">
           <MyTimer expiryTimestamp={time} />
         </div>
       </div>

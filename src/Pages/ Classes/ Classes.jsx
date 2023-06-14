@@ -7,6 +7,7 @@ import useSecureAxios from "../../hooks/useSecureAxios";
 import Swal from "sweetalert2";
 import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 
 const Classes = () => {
   const { user } = useAuth();
@@ -14,6 +15,11 @@ const Classes = () => {
   const [isInstructor] = useInstructor();
   const [axiosSecure] = useSecureAxios();
   const { register, handleSubmit, reset } = useForm();
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  console.log("login page location", location);
+  const from = location.state?.from?.pathname || "/";
 
   const { data: classes = [], refetch } = useQuery(["classes"], async () => {
     const res = await axiosSecure.get("/classes");
@@ -26,7 +32,12 @@ const Classes = () => {
 
   const handleSelect = (id) => {
     if (!user) {
-      alert("Please login before selecting a class");
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Please login before selecting a class!",
+      });
+      // navigate(from, { replace: true });
     } else if (user) {
       console.log(id);
       const findClass = approvedClasses.find((item) => item._id === id);
@@ -84,9 +95,16 @@ const Classes = () => {
   return (
     <>
       <h1 className="family-lucky text-5xl text-center my-12">Our Classes</h1>
-      <div className="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5 ">
+      <div className="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5  ">
         {approvedClasses.map((approvedClass) => (
-          <div key={approvedClass._id} className=" ">
+          <div
+            key={approvedClass._id}
+            className={`${
+              approvedClass?.seats === 0
+                ? "bg-red-600 text-white rounded-lg"
+                : ""
+            }`}
+          >
             <div className="rounded-lg overflow-hidden shadow-lg border border-yellow-400 ">
               <img
                 className="w-full h-[400px] object-cover object-center"
@@ -101,13 +119,17 @@ const Classes = () => {
                   Instructor: {approvedClass.instructorName}
                 </div>
                 <p className="text-gray-700 text-base mb-2">
-                  Available seats: 1
+                  Available seats: {approvedClass.seats}
                 </p>
                 <p className="text-gray-700 font-bold text-xl mb-2">
                   Price: ${approvedClass.price}
                 </p>
                 <button
-                  disabled={isAdmin || isInstructor ? true : false}
+                  disabled={
+                    isAdmin || isInstructor || approvedClass?.seats === 0
+                      ? true
+                      : false
+                  }
                   className="btn btn-accent text-white"
                   onClick={() => handleSelect(approvedClass._id)}
                 >

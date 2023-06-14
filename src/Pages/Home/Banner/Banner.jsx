@@ -33,7 +33,7 @@ const Banner = () => {
         <img className="banner-img" src={banner1} alt="" />
         <div className="banner-contents">
           <h2 className="family-grand subheading">spend a great week with</h2>
-          <h1 className="family-lucky heading mt-4">
+          <h1 className="family-lucky heading mt-4 text-[40px] lg:text-[100px] leading-10 lg:leading-[90px]">
             hello summer <br />
             Children camp
           </h1>
@@ -46,7 +46,7 @@ const Banner = () => {
         <img className="banner-img" src={banner2} alt="" />
         <div className="banner-contents">
           <h2 className="family-grand subheading">children summer camp</h2>
-          <h1 className="family-lucky heading mt-4">
+          <h1 className="family-lucky heading mt-4 text-[40px] lg:text-[100px] leading-10 lg:leading-[90px]">
             A chance to provide <br />
             formative experiences
           </h1>
@@ -59,7 +59,7 @@ const Banner = () => {
         <img className="banner-img" src={banner3} alt="" />
         <div className="banner-contents">
           <h2 className="family-grand subheading">you will find</h2>
-          <h1 className="family-lucky heading mt-4">
+          <h1 className="family-lucky heading mt-4 text-[40px] lg:text-[100px] leading-10 lg:leading-[90px]">
             challenges and <br />
             new relationships
           </h1>

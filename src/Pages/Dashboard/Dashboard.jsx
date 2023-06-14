@@ -1,15 +1,19 @@
 import React from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useLocation } from "react-router-dom";
 
-import { UserGroupIcon, BookmarkIcon } from "@heroicons/react/24/solid";
+import {
+  UserGroupIcon,
+  BookmarkIcon,
+  ArrowLeftIcon,
+} from "@heroicons/react/24/solid";
 import useAdmin from "../../hooks/useAdmin";
 import useInstructor from "../../hooks/useInstructor";
-import FeedbackModal from "./FeedbackModal";
 
 const Dashboard = () => {
   // TODO: make it dynamic based on db data later
 
   const [isAdmin] = useAdmin();
+  const isDashboardRoute = window.location.pathname == "/dashboard";
 
   // console.log("this is adminin or not", isAdmin);
   // const [isInstructor, isInstructorLoading] = useInstructor();
@@ -18,6 +22,11 @@ const Dashboard = () => {
 
   return (
     <div className="drawer lg:drawer-open">
+      {/* {isDashboardRoute && (
+        <h1 className="text-2xl text-center font-bold absolute mb-4 text-red-400 bg-yellow-400 w-full">
+          Welcome to the Dashboard!
+        </h1>
+      )} */}
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content flex flex-col items-center justify-center">
         {/* Page content here */}
@@ -28,6 +37,11 @@ const Dashboard = () => {
           Open drawer
         </label>
 
+        {isDashboardRoute && (
+          <h1 className="text-2xl text-center font-bold absolute top-0 mb-4 text-white p-8 bg-blue-300 w-full">
+            Welcome to the Dashboard!
+          </h1>
+        )}
         <Outlet></Outlet>
       </div>
       <div className="drawer-side">
@@ -37,6 +51,15 @@ const Dashboard = () => {
 
           {isAdmin && (
             <>
+              <li className="mb-4">
+                <Link
+                  to="/"
+                  className="flex items-center bg-yellow-200 rounded-xl font-bold text-sm text-yellow-900 py-3 px-4"
+                >
+                  <ArrowLeftIcon className="w-6 h-6"></ArrowLeftIcon>
+                  Back to Home
+                </Link>
+              </li>
               <li className="mb-4">
                 <Link
                   to="/dashboard/manage_classes"
@@ -55,6 +78,7 @@ const Dashboard = () => {
                   Manage Classes
                 </Link>
               </li>
+
               <li className="mb-4">
                 <Link
                   to="/dashboard/manage_users"
@@ -69,6 +93,15 @@ const Dashboard = () => {
 
           {isInstructor && (
             <>
+              <li className="mb-4">
+                <Link
+                  to="/"
+                  className="flex items-center bg-yellow-200 rounded-xl font-bold text-sm text-yellow-900 py-3 px-4"
+                >
+                  <ArrowLeftIcon className="w-6 h-6"></ArrowLeftIcon>
+                  Back to Home
+                </Link>
+              </li>
               <li className="mb-4">
                 <Link
                   to="/dashboard/add_class"
@@ -100,6 +133,15 @@ const Dashboard = () => {
           )}
           {!isAdmin && !isInstructor && (
             <>
+              <li className="mb-4">
+                <Link
+                  to="/"
+                  className="flex items-center bg-yellow-200 rounded-xl font-bold text-sm text-yellow-900 py-3 px-4"
+                >
+                  <ArrowLeftIcon className="w-6 h-6"></ArrowLeftIcon>
+                  Back to Home
+                </Link>
+              </li>
               <li className="mb-4">
                 <Link
                   to="/dashboard/my_selected_classes"

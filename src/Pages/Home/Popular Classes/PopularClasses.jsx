@@ -20,12 +20,24 @@ const PopularClasses = () => {
     console.log(classes);
     return res.data;
   });
+  const approvedClasses = classes.filter((item) => item.status === "approved");
+  console.log(approvedClasses, "this is approved classes");
+
+  const getSlidesPerView = () => {
+    // Determine the number of slides per view based on screen size
+    if (window.innerWidth < 768) {
+      return 1; // Show 1 slide per view on mobile
+    } else {
+      return 3; // Show 3 slides per view on larger screens
+    }
+  };
+
   return (
     <div className="container mx-auto my-24 overflow-hidden">
       <h1 className="text-center mb-8 font-bold text-5xl family-lucky">
         Popular Classes
       </h1>
-      <p className="text-center w-1/2 mx-auto mb-6 family-aleo">
+      <p className="text-center lg:w-1/2 w-full mx-auto mb-6 family-aleo">
         Explore our selection of popular classes that are loved by our students.
         These classes cover a wide range of topics and provide valuable learning
         opportunities.
@@ -34,7 +46,7 @@ const PopularClasses = () => {
         effect={"coverflow"}
         grabCursor={true}
         centeredSlides={true}
-        slidesPerView={3}
+        slidesPerView={getSlidesPerView()}
         coverflowEffect={{
           rotate: 50,
           stretch: 0,
@@ -53,7 +65,7 @@ const PopularClasses = () => {
           />
         </SwiperSlide> */}
 
-        {classes.map((singleClass) => (
+        {approvedClasses.map((singleClass) => (
           <SwiperSlide
             key={singleClass.id}
             className="border border-yellow-400 rounded-lg p-6 family-aleo"

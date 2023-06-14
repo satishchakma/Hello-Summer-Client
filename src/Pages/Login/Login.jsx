@@ -130,7 +130,7 @@ const Login = () => {
                 href="#"
                 className="font-medium text-blue-600 hover:text-blue-500"
               >
-                New to Hello Summer?{" "}
+                New to Hello Summer?
                 <Link to="/register" className="underline">
                   Register here
                 </Link>

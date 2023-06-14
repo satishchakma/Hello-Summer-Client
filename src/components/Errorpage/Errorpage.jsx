@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Errorpage = () => {
   return (
@@ -9,6 +10,9 @@ const Errorpage = () => {
           Check that you typed the address correctly, go back to your previous
           page or try using our site search to find something specific.
         </h2>
+        <Link to="/">
+          <button className="banner-btn my-6">Back to Home</button>
+        </Link>
       </div>
       <div className="w-1/2 flex justify-end">
         <img

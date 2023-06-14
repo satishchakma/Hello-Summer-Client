@@ -22,18 +22,28 @@ const PopularInstructors = () => {
       return res.data;
     }
   );
+
+  const getSlidesPerView = () => {
+    // Determine the number of slides per view based on screen size
+    if (window.innerWidth < 768) {
+      return 1; // Show 1 slide per view on mobile
+    } else {
+      return 3; // Show 3 slides per view on larger screens
+    }
+  };
+
   return (
     <div className=" bg-[#fcc044] py-24">
       <h1 className="text-center mb-8 font-bold text-5xl family-lucky">
         Popular Instructors
       </h1>
-      <p className="text-center w-1/2 mx-auto mb-6 family-aleo">
+      <p className="text-center lg:w-1/2 w-full px-3 mx-auto mb-6 family-aleo">
         Explore our selection of popular Instructors that are loved by our
         students. These classes cover a wide range of topics and provide
         valuable learning opportunities.
       </p>
       <Swiper
-        slidesPerView={3}
+        slidesPerView={getSlidesPerView()}
         spaceBetween={30}
         pagination={{
           clickable: true,
