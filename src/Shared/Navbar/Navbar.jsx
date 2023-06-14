@@ -4,9 +4,11 @@ import { Link, NavLink } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import { AuthContext } from "../../Providers/AuthProviders";
 import { UserCircleIcon } from "@heroicons/react/24/solid";
+import { isDarkModeContext } from "../../Day night toggle/DayNight";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
+  const isDarkMode = useContext(isDarkModeContext);
 
   const handleLogOut = () => {
     logOut()
@@ -15,7 +17,11 @@ const Navbar = () => {
   };
   return (
     <div>
-      <div className="navbar bg-base-100 container mx-auto my-2 lg:flex hidden">
+      <div
+        className={`navbar ${
+          isDarkMode ? "dark" : ""
+        }  bg-base-100  container mx-auto my-2 lg:flex hidden  px-4 rounded-lg`}
+      >
         <Link to={`/`} className="flex-1">
           <img src={logo} alt="" />
         </Link>

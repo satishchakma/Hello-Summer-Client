@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+body.dark {
+  background-color: #141d26;
+  color: #fff;
+}
+.dark {
+  background-color: black !important;
+}
 .navbar {
   font-family: "Aleo", serif;
   font-weight: 700;

@@ -8,6 +8,7 @@ import WhyChooseUs from "./Why Choose Us/WhyChooseUs";
 // framer motion
 
 import { motion, useScroll } from "framer-motion";
+import DayNight from "../../../Day night toggle/DayNight";
 
 const Home = () => {
   const { scrollYProgress } = useScroll();
@@ -17,7 +18,7 @@ const Home = () => {
         className="progress-bar"
         style={{ scaleX: scrollYProgress }}
       />
-
+      <DayNight></DayNight>
       <Banner></Banner>
       <Countdown></Countdown>
       <PopularClasses></PopularClasses>
