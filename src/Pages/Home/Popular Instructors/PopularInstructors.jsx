@@ -10,9 +10,12 @@ import { Pagination } from "swiper";
 
 import useSecureAxios from "../../../hooks/useSecureAxios";
 import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
+import { useEffect } from "react";
 
 const PopularInstructors = () => {
   const [axiosSecure] = useSecureAxios();
+  const [slidesPerView, setSlidesPerView] = useState(getSlidesPerView());
 
   const { data: instructors = [], refetch } = useQuery(
     ["instructors"],
@@ -23,14 +26,25 @@ const PopularInstructors = () => {
     }
   );
 
-  const getSlidesPerView = () => {
+  useEffect(() => {
+    // Update slides per view on window resize
+    const handleResize = () => {
+      setSlidesPerView(getSlidesPerView());
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+  function getSlidesPerView() {
     // Determine the number of slides per view based on screen size
     if (window.innerWidth < 768) {
       return 1; // Show 1 slide per view on mobile
     } else {
       return 3; // Show 3 slides per view on larger screens
     }
-  };
+  }
 
   return (
     <div className=" bg-[#fcc044] py-24">
@@ -43,7 +57,7 @@ const PopularInstructors = () => {
         valuable learning opportunities.
       </p>
       <Swiper
-        slidesPerView={getSlidesPerView()}
+        slidesPerView={slidesPerView}
         spaceBetween={30}
         pagination={{
           clickable: true,

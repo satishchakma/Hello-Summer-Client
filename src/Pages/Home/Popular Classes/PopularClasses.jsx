@@ -11,9 +11,32 @@ import "swiper/css/pagination";
 import { EffectCoverflow, Pagination } from "swiper";
 import useSecureAxios from "../../../hooks/useSecureAxios";
 import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
+import { useEffect } from "react";
 
 const PopularClasses = () => {
   const [axiosSecure] = useSecureAxios();
+  const [slidesPerView, setSlidesPerView] = useState(getSlidesPerView());
+
+  useEffect(() => {
+    // Update slides per view on window resize
+    const handleResize = () => {
+      setSlidesPerView(getSlidesPerView());
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+  function getSlidesPerView() {
+    // Determine the number of slides per view based on screen size
+    if (window.innerWidth < 768) {
+      return 1; // Show 1 slide per view on mobile
+    } else {
+      return 3; // Show 3 slides per view on larger screens
+    }
+  }
 
   const { data: classes = [], refetch } = useQuery(["classes"], async () => {
     const res = await axiosSecure.get("/classes");
@@ -22,15 +45,6 @@ const PopularClasses = () => {
   });
   const approvedClasses = classes.filter((item) => item.status === "approved");
   console.log(approvedClasses, "this is approved classes");
-
-  const getSlidesPerView = () => {
-    // Determine the number of slides per view based on screen size
-    if (window.innerWidth < 768) {
-      return 1; // Show 1 slide per view on mobile
-    } else {
-      return 3; // Show 3 slides per view on larger screens
-    }
-  };
 
   return (
     <div className="container mx-auto my-24 overflow-hidden">
@@ -46,7 +60,7 @@ const PopularClasses = () => {
         effect={"coverflow"}
         grabCursor={true}
         centeredSlides={true}
-        slidesPerView={getSlidesPerView()}
+        slidesPerView={slidesPerView}
         coverflowEffect={{
           rotate: 50,
           stretch: 0,
@@ -70,7 +84,7 @@ const PopularClasses = () => {
             key={singleClass.id}
             className="border border-yellow-400 rounded-lg p-6 family-aleo"
           >
-            <img className="h-full rounded-lg" src={singleClass.classImg} />
+            <img className=" rounded-lg" src={singleClass.classImg} />
             <h1 className="font-bold my-4">{singleClass.className}</h1>
             <h2 className="font-semibold">
               Instructor: {singleClass.instructorName}
